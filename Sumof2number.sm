@@ -1,0 +1,78 @@
+.stack 100h
+.data 
+ MSG DB "Enter number 1:$"
+ MSG1 DB "Enter number 2:$"
+ MSG2  DB "Your Sum is:$"
+ MSG3  DB "Your Diff is:$"
+.code
+main proc
+
+mov ax,@data
+mov ds,ax
+
+LEA DX,MSG 
+MOV AH,9
+INT 21H 
+
+
+MOV  AH,01
+INT 21H
+MOV  BL, AL
+
+MOV  AH,02
+MOV DL,0DH
+INT 21H 
+
+MOV DL,0Ah
+INT 21H 
+
+LEA DX,MSG1
+MOV AH,9
+INT 21H 
+
+MOV  AH,01
+INT 21H
+MOV  CL, AL
+
+MOV BH,BL
+ADD BL,CL
+SUB BL,30H
+
+MOV  AH,02
+MOV DL,0DH
+INT 21H 
+MOV DL,0Ah
+INT 21H 
+
+LEA DX,MSG2
+MOV AH,9
+INT 21H 
+
+
+
+MOV AH,2
+MOV DL,BL
+INT 21h 
+
+SUB BH,CL
+ADD BH,30h
+
+MOV  AH,02
+MOV DL,0DH
+INT 21H 
+MOV DL,0Ah
+INT 21H 
+
+
+LEA DX,MSG3
+MOV AH,9
+INT 21H 
+MOV AH,2
+MOV DL,BH
+INT 21h 
+
+
+
+main endp
+
+end main
